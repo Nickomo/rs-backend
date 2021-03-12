@@ -25,11 +25,13 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // Routers
 const countryRouter = require('./modules/countries/country.router');
+const placeRouter = require('./modules/places/place.router');
 
 app.use('/countries', countryRouter);
+app.use('/places', placeRouter);
 
 app.use((req, res) => {
-  res.status(StatusCodes.NOT_IMPLEMENTED).send(ReasonPhrases.NOT_IMPLEMENTED);
+    res.status(StatusCodes.NOT_IMPLEMENTED).send(ReasonPhrases.NOT_IMPLEMENTED);
 });
 
 app.use(errorMiddleware);

@@ -1,5 +1,6 @@
 const express = require('express');
 const wrap = require('../../common/errors/async-error-wrapper');
+const placeService = require('./place.service');
 const { DEFAULT_LANG } = require('../../common/config');
 const { ENTITY_NAME } = require('./constants');
 
@@ -9,8 +10,9 @@ router.get(
     '/',
     wrap(async (req, res) => {
         const lang = req.query.lang || DEFAULT_LANG;
-        const data = await countryService.getAll(lang);
+        const data = await placeService.getAll(lang);
         res.send(data);
+        console.log("object");
     })
 );
 
