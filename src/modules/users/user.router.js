@@ -4,15 +4,14 @@ const wrap = require('../../common/errors/async-error-wrapper');
 const userService = require('./user.service');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
-const { urlencoded } = require('express');
 
 const router = express.Router();
 const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v1615998773/default_ts3gls.png';
 
 
-const loader = multer({dest: 'users/avatars/'});
 
-router.post('/create', loader.single('photoUrl'),
+
+router.post('/create',
     wrap(async(req, res) => {
         let photo = {};
         if(req.file) {
@@ -27,6 +26,7 @@ router.post('/create', loader.single('photoUrl'),
 router.post('/login',
     wrap(async(req, res) => {
         const user = {...req.body, password: sha256(req.body.password.toString()).toString()};
+        console.log(req.body)
         const result = await userService.login(user);
         if(!result.ok) res.status(500);
         res.json(result);

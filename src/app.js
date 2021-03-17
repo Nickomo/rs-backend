@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+const multer = require('multer');
 
 const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 
@@ -14,9 +15,12 @@ const requestLogMiddleware = require('./middleware/request-logger');
 const app = express();
 const swaggerDoc = YAML.load(path.join(__dirname, './docs/doc.yaml'));
 
+const loader = multer({dest: 'users/avatars/'});
+
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use(loader.single('photoUrl'))
 
 // app.use(express.urlencoded({extended: true}));
 
