@@ -18,7 +18,7 @@ const swaggerDoc = YAML.load(path.join(__dirname, './docs/doc.yaml'));
 const loader = multer({dest: 'users/avatars/'});
 
 const corsOptionsLocal = {
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     credentials: true,
 }
 
@@ -27,7 +27,7 @@ const corsOptionsHost = {
     credentials: true,
 }
 
-app.use(cors(corsOptionsHost));
+app.use(cors(corsOptionsLocal));
 app.use(helmet());
 app.use(express.json());
 app.use(loader.single('photoUrl'))
