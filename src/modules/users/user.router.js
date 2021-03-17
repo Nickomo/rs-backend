@@ -9,9 +9,9 @@ const router = express.Router();
 const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v1615998773/default_ts3gls.png';
 
 
-function setAuthorizedCookies(res) {
-    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now + 1_440_000 * 10)})
-    res.cookie('authorized', result.userId, {httpOnly: false, expires: new Date(Date.now + 1_440_000 * 10)})
+function setAuthorizedCookies(res, result) {
+    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10)})
+    res.cookie('authorized', result.userId, {httpOnly: false, expires: new Date(Date.now() + 1000 * 86_400 * 10)})
 }
 
 router.post('/create',
@@ -34,10 +34,12 @@ router.post('/create',
 router.post('/login',
     wrap(async(req, res) => {
         const user = {...req.body, password: sha256(req.body.password.toString()).toString()};
-        let result = await userService.login(user);
+        const result = await userService.login(user);
+
+        console.log(result)
 
         if(!result.ok) res.status(500);
-        setAuthorizedCookies(res);
+        setAuthorizedCookies(res, result);
 
         const {userId, ...json} = result;
         res.json(json);
