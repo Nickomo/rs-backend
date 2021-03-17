@@ -30,4 +30,4 @@
 
 
 
-GET http://localhost:3000/ratings?placeId=3 HTTP/1.1
+GET http://localhost:3000/ratings?placeId=5 HTTP/1.1

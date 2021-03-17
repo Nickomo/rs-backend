@@ -18,6 +18,8 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
+// app.use(express.urlencoded({extended: true}));
+
 app.use(requestLogMiddleware);
 
 app.use('/favicon.ico', (req, res) => res.sendStatus(StatusCodes.NO_CONTENT));
