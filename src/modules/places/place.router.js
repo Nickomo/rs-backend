@@ -12,7 +12,6 @@ router.get(
         const lang = req.query.lang || DEFAULT_LANG;
         const data = await placeService.getAll(lang);
         res.send(data);
-        console.log("object");
     })
 );
 

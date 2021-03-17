@@ -26,9 +26,13 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // Routers
 const countryRouter = require('./modules/countries/country.router');
 const placeRouter = require('./modules/places/place.router');
+const usersRouter = require('./modules/users/user.router');
+const ratingsRouter = require('./modules/ratings/rating.router');
 
 app.use('/countries', countryRouter);
 app.use('/places', placeRouter);
+app.use('/users', usersRouter);
+app.use('/ratings', ratingsRouter);
 
 app.use((req, res) => {
     res.status(StatusCodes.NOT_IMPLEMENTED).send(ReasonPhrases.NOT_IMPLEMENTED);

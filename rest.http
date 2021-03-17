@@ -1,0 +1,33 @@
+# POST http://localhost:3000/users/create HTTP/1.1
+# content-type: application/json
+
+# {
+#     "login": "test1234",
+#     "name": "newName",
+#     "password": "superPassword"
+# }
+
+
+# POST http://localhost:3000/users/login HTTP/1.1
+# content-type: application/json
+
+# {
+#     "login": "byaka",
+#     "password": "123456"
+# }
+
+
+# POST http://localhost:3000/ratings/add HTTP/1.1
+# content-type: application/json
+
+# {
+#     "rating": 9,
+#     "placeId": 3,
+#     "userId": "604fd3588a80bd5d4c31a1d6"
+# }
+
+# "userId": "605115cdeea6805610b8d0a5"
+
+
+
+GET http://localhost:3000/ratings?placeId=3 HTTP/1.1
