@@ -16,7 +16,7 @@ router.post('/create', loader.single('photoUrl'),
     wrap(async(req, res) => {
         let photo = {};
         if(req.file) {
-            const photo = await cloudinary.uploader.upload(req.file.path);
+            photo = await cloudinary.uploader.upload(req.file.path);
         }
         const user = {...req.body, photoUrl: photo.url || defaultPhoto, password: sha256(req.body.password.toString()).toString()}
         const result = await userService.create(user);
