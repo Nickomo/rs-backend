@@ -11,7 +11,7 @@ const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v16159
 
 function setAuthorizedCookies(res, result) {
     res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10)})
-    res.cookie('authorized', result.userId, {httpOnly: false, expires: new Date(Date.now() + 1000 * 86_400 * 10)})
+    res.cookie('authorized', true, {expires: new Date(Date.now() + 1000 * 86_400 * 10)})
 }
 
 router.post('/create',
@@ -35,8 +35,6 @@ router.post('/login',
     wrap(async(req, res) => {
         const user = {...req.body, password: sha256(req.body.password.toString()).toString()};
         const result = await userService.login(user);
-
-        console.log(result)
 
         if(!result.ok) res.status(500);
         setAuthorizedCookies(res, result);
