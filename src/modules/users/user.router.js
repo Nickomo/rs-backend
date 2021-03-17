@@ -19,7 +19,9 @@ router.post('/create',
         }
         const user = {...req.body, photoUrl: photo.url || defaultPhoto, password: sha256(req.body.password.toString()).toString()}
         const result = await userService.create(user);
-        res.json({message: result});
+
+        if(!result.ok) res.status(500);
+        res.json(result);
     })
 )
 

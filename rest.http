@@ -1,11 +1,11 @@
-# POST http://localhost:3000/users/create HTTP/1.1
-# content-type: application/json
+POST http://localhost:3000/users/create HTTP/1.1
+content-type: application/json
 
-# {
-#     "login": "test1234",
-#     "name": "newName",
-#     "password": "superPassword"
-# }
+{
+    "login": "test12341",
+    "name": "newName",
+    "password": "superPassword"
+}
 
 
 # POST http://localhost:3000/users/login HTTP/1.1
@@ -30,4 +30,4 @@
 
 
 
-GET http://localhost:3000/ratings?placeId=5 HTTP/1.1
+# GET http://localhost:3000/ratings?placeId=5 HTTP/1.1

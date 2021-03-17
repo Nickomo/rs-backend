@@ -9,11 +9,13 @@ const { Types } = require('mongoose');
 
 
 const create = async (user) => {
-    let response = {message: "Account succesfully created"};
+    let response = {message: "User already exists", ok: false};
 
-    if(await User.exists({login: user.login})) response.message = "User already exists";
+    if(!await User.exists({login: user.login})) {
+        const userId = await(await User.create(user)).get('_id');
+        response = {...response, userId, ok: true};
+    }
 
-    User.create(user);
     return response;
 }
 
@@ -21,9 +23,6 @@ const login = async (user) => {
     let response = { message: "Such user doesn't exists", ok: false };
     const userExists = await User.exists({login: user.login});
     const currUser = await User.findOne({login: user.login});
-
-    console.log(`user from post ${user.password}`);
-    console.log(`user from db ${await currUser.get('password')}`)
 
     if(userExists && user.password === await currUser.get('password')) {
         response = { message: "Login successfully", userId: await currUser.get('_id'), ok: true }
