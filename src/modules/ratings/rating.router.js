@@ -16,7 +16,9 @@ router.get('/',
 
 router.post('/add',
     wrap(async (req, res) => {
-        const result = await ratingService.setRating(req.body);
+        const params = {...req.body, userId: req.cookie.userId};
+        console.log(params);
+        const result = await ratingService.setRating(params);
         if(!result.ok) res.status(401);
         res.json(result);
     })

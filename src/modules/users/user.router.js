@@ -9,7 +9,10 @@ const router = express.Router();
 const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v1615998773/default_ts3gls.png';
 
 
-
+function setAuthorizedCookies(res) {
+    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now + 1_440_000 * 10)})
+    res.cookie('authorized', result.userId, {httpOnly: false, expires: new Date(Date.now + 1_440_000 * 10)})
+}
 
 router.post('/create',
     wrap(async(req, res) => {
@@ -21,18 +24,32 @@ router.post('/create',
         const result = await userService.create(user);
 
         if(!result.ok) res.status(500);
-        res.json(result);
+        setAuthorizedCookies(res);
+
+        const {userId, ...json} = result;
+        res.json(json);
     })
 )
 
 router.post('/login',
     wrap(async(req, res) => {
         const user = {...req.body, password: sha256(req.body.password.toString()).toString()};
-        console.log(req.body)
-        const result = await userService.login(user);
+        let result = await userService.login(user);
+
         if(!result.ok) res.status(500);
-        res.json(result);
+        setAuthorizedCookies(res);
+
+        const {userId, ...json} = result;
+        res.json(json);
     })
 );
+
+router.get('/unlogin',
+    wrap(async(req, res) => {
+        res.clearCookie('uid');
+        res.clearCookie('authorized');
+        res.json({message: "User succesfully unlogined"});
+    })
+)
 
 module.exports = router;
