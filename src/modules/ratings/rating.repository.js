@@ -11,12 +11,17 @@ const ratingExcludedFields = { _id: 0, __v: 0};
 const userExcludedFields = {__v: 0, password: 0, login: 0 };
 
 const setRating = async (rating) => {
-    if(await Rating.exists({userId: rating.userId, placeId: rating.placeId})) {
-        await Rating.updateOne({userId: rating.userId, placeId: rating.placeId}, {rating: rating.rating});
-    } else {
-        Rating.create(rating);
+    let response = {ok: false, message: "Before login"};
+    if(await User.exists({_id: rating.userId})) {
+        if(await Rating.exists({userId: rating.userId, placeId: rating.placeId})) {
+            await Rating.updateOne({userId: rating.userId, placeId: rating.placeId}, {rating: rating.rating});
+        } else {
+            Rating.create(rating);
+        }
+        response = {ok: true, message: "Rating successfully added"};
     }
-    return {message: "Rating successfully added"};
+
+    return response;
 }
 
 const getRatingByPlaceId = async (placeId) => {
