@@ -24,7 +24,7 @@ router.post('/create',
         const result = await userService.create(user);
 
         if(!result.ok) res.status(500);
-        setAuthorizedCookies(res);
+        setAuthorizedCookies(res, result);
 
         const {userId, ...json} = result;
         res.json(json);
