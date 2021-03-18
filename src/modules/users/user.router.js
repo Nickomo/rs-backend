@@ -10,8 +10,8 @@ const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v16159
 
 
 function setAuthorizedCookies(res, result) {
-    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain:'app.com'});
-    res.cookie('authorized', true, {expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain: 'app.com'});
+    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain:'com'});
+    res.cookie('authorized', true, {expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain: 'com'});
 }
 
 router.post('/create',
