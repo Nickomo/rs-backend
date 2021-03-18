@@ -23,7 +23,7 @@ const corsOptionsLocal = {
 }
 
 const corsOptionsHost = {
-    origin: 'https://borodichalex-travel-app.netlify.app/',
+    origin: 'https://borodichalex-travel-app.netlify.app',
     credentials: true,
 }
 
