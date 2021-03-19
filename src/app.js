@@ -27,7 +27,7 @@ const corsOptionsHost = {
     credentials: true,
 }
 
-app.use(cors(corsOptionsHost));
+app.use(cors(corsOptionsLocal));
 app.use(helmet());
 app.use(express.json());
 app.use(loader.single('photoUrl'))

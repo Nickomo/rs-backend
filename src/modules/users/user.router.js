@@ -10,8 +10,8 @@ const defaultPhoto ='https://res.cloudinary.com/rs-travelapp/image/upload/v16159
 
 
 function setAuthorizedCookies(res, result) {
-    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain:'com'});
-    res.cookie('authorized', true, {expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none', domain: 'com'});
+    res.cookie('uid', result.userId, {httpOnly: true, expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none'});
+    res.cookie('authorized', true, {expires: new Date(Date.now() + 1000 * 86_400 * 10), secure: true, sameSite: 'none'});
 }
 
 router.post('/create',
@@ -48,7 +48,7 @@ router.get('/unlogin',
     wrap(async(req, res) => {
         res.clearCookie('uid');
         res.clearCookie('authorized');
-        res.json({message: "User succesfully unlogined"});
+        res.json({message: "User succesfully unlogined", ok: true});
     })
 )
 
