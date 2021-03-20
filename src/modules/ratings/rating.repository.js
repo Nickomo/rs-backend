@@ -25,9 +25,9 @@ const setRating = async (rating) => {
 }
 
 const getRatingByUserId = async (data) => {
-    const rating = Rating.findOne({userId: data.uid}).get('rating') || 0;
-    console.log(rating);
-    return {rating};
+    const line = await Rating.findOne({userId: data.uid, placeId: data.placeId});
+    if(!line) return {rating: 0}
+    return {rating: await line.get('rating')};
 }
 
 const getRatingByPlaceId = async (placeId) => {
@@ -45,7 +45,7 @@ const getRatingByPlaceId = async (placeId) => {
             for (const user of usersData) {
                 if(user._id == el.userId) {
                     const {userId, ...resultRates} = el;
-                    const {login, ...resultUser} = user;
+                    const {_id, login, ...resultUser} = user;
                     const result = {...resultRates, user: resultUser};
                     return result;
                 }
