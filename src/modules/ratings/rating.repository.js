@@ -39,7 +39,7 @@ const getRatingByPlaceId = async (placeId) => {
             for (const user of usersData) {
                 if(user._id == el.userId) {
                     const {userId, ...resultRates} = el;
-                    const {_id, login, ...resultUser} = user;
+                    const {login, ...resultUser} = user;
                     const result = {...resultRates, user: resultUser};
                     return result;
                 }
