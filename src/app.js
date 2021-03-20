@@ -29,7 +29,7 @@ const corsOptionsHost = {
 }
 
 app.use(cookies());
-app.use(cors(corsOptionsLocal));
+app.use(cors(corsOptionsHost));
 app.use(helmet());
 app.use(express.json());
 app.use(loader.single('photoUrl'))
