@@ -14,6 +14,14 @@ router.get('/',
     })
 )
 
+router.get('/curr',
+    wrap(async (req, res) => {
+        const result = await ratingService.getCurr({placeId: req.query.placeId, uid: req.cookies.uid});
+        if(!result.ok) res.status(500);
+        res.json(result);
+    })
+)
+
 router.post('/add',
     wrap(async (req, res) => {
         const params = {...req.body, userId: req.cookies.uid};

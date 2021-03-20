@@ -8,7 +8,12 @@ const getOne = async (placeId) => {
     return await ratingRepo.getRatingByPlaceId(placeId)
 };
 
+const getCurr = async (data) => {
+    return await ratingRepo.getRatingByUserId(data)
+};
+
 module.exports = {
     setRating,
     getOne,
+    getCurr,
 };
