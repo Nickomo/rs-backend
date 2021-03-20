@@ -24,7 +24,7 @@ const setRating = async (rating) => {
     return response;
 }
 
-const getRatingByUserId(data) {
+const getRatingByUserId = async (data) => {
     const rating = Rating.findOne({userId: data.uid}).get('rating') || 0;
     console.log(rating);
     return {rating};
@@ -62,4 +62,5 @@ const getRatingByPlaceId = async (placeId) => {
 module.exports = {
     setRating,
     getRatingByPlaceId,
+    getRatingByUserId
 };
