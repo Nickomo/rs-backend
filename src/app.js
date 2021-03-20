@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const multer = require('multer');
+const cookies = require('cookie-parser');
 
 const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 
@@ -27,6 +28,7 @@ const corsOptionsHost = {
     credentials: true,
 }
 
+app.use(cookies());
 app.use(cors(corsOptionsLocal));
 app.use(helmet());
 app.use(express.json());
